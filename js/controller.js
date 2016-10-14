@@ -1,4 +1,3 @@
-
 App.controller("MainController", function ($scope) {
 
 });
@@ -14,9 +13,10 @@ App.controller("MapController", function ($scope,$location, $localStorage,$geolo
 	
 	var cMap = this;
 	var marker;
+        
 
-	
-	NgMap.getMap().then(function(map) {
+if (navigator.geolocation) {
+NgMap.getMap().then(function(map) {
 	    
 	    //Store current map
 	    cMap = map;
@@ -25,7 +25,10 @@ App.controller("MapController", function ($scope,$location, $localStorage,$geolo
 	    marker = map.markers[0];
 
 	    //Request geolocation
-	    if (navigator.geolocation) {
+	    
+
+	    
+	  });
 			$geolocation.getCurrentPosition({
 			    timeout: 60000
 			}).then(function(position) {
@@ -34,8 +37,8 @@ App.controller("MapController", function ($scope,$location, $localStorage,$geolo
 			alert("Browser doesn't support Geolocation");
 		}
 
-	    
-	  });
+	
+	
 
 
 	$scope.getCenter = function(){
@@ -58,3 +61,4 @@ App.controller("MapController", function ($scope,$location, $localStorage,$geolo
 	}
 
 });
+	
