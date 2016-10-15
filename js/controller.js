@@ -14,8 +14,13 @@ App.controller("MapController", function ($scope, $location, $localStorage, $geo
     $(".container").css("height", $(window).innerHeight());
     $(".container").css("width", $(window).innerWidth());
 
-    $(".angular-google-map-container").css("height", $(window).innerHeight());
+    $(".angular-google-map-container").css("height", $(window).innerHeight() - 120);
     $(".angular-google-map-container").css("width", $(window).innerWidth());
+    $(".angular-google-map-container").css("margin-top","60px");
+
+   //alert($(".angular-google-map-container").height());
+    $(".center-marker").css("top",$(".angular-google-map-container").height()/2 + 11);
+    $(".center-marker").css("left",$(".angular-google-map-container").width()/2 - 11);
 
     var map;
     var uuid;
@@ -28,7 +33,9 @@ App.controller("MapController", function ($scope, $location, $localStorage, $geo
         },
         zoom: 21,
         options: {
-            mapTypeId: "satellite"
+            mapTypeId: "hybrid",
+            mapTypeControl: false,
+            streetViewControl: false
         }
     };
 
@@ -37,7 +44,7 @@ App.controller("MapController", function ($scope, $location, $localStorage, $geo
         options: {
             icon: "images/cPos.png"
         },
-        coords: {}
+        coords: {}  
     };
 
     //Get current location
@@ -53,13 +60,16 @@ App.controller("MapController", function ($scope, $location, $localStorage, $geo
                 latitude: $scope.myPosition.coords.latitude,
                 longitude: $scope.myPosition.coords.longitude
             };
+
+            var point = new google.maps.LatLng($scope.marker.coords.latitude, $scope.marker.coords.longitude);
+            map.setCenter(point);
+
         });
     } else {
         x.innerHTML = "Geolocation is not supported by this browser.";
     }
 
-
-
+    //When map is ready to load
     uiGmapIsReady.promise(1).then(function (instances) {
         instances.forEach(function (inst) {
             map = inst.map;
