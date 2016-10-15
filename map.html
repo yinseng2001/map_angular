@@ -1,0 +1,18 @@
+<div class="container">
+	<div class="uNavi">
+		<button class="btnBack" ng-click="goBack()"><img src="images/back_icon.png" width="25px"  height="25px" /><span>  Back</span></button>
+	</div>
+	<ng-map center="current-location" map-type-id="SATELLITE"​ style="height:100%;" disable-default-u-i="true" zoom="23">
+		<marker position="current" centered="true" icon="images/cPos.png"></marker>	
+	</ng-map>
+	<img src="images/spotlight-poi.png" class="center-marker"/>
+	<div class="bNavi">
+		<button class="btnSet" ng-click="getCenter()">Set Location</button>		
+		<button class="btnCur" ng-click="gotoPos()""><img src="images/gotocPos.png" /></button>
+	</div>
+
+</div>
+
+
+     
+ 
